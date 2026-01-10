@@ -1,6 +1,7 @@
 using Microsoft.AspNetCore.Identity;
 using Microsoft.EntityFrameworkCore;
 using PracticeProject.Data;
+using PracticeProject.Services.Projects;
 
 namespace PracticeProject
 {
@@ -15,6 +16,7 @@ namespace PracticeProject
             builder.Services.AddDbContext<ApplicationDbContext>(options =>
                 options.UseSqlServer(connectionString));
             builder.Services.AddDatabaseDeveloperPageExceptionFilter();
+            builder.Services.AddScoped<IProjectService, ProjectService>();
 
             builder.Services.AddDefaultIdentity<User>(options => options.SignIn.RequireConfirmedAccount = false)
                 .AddEntityFrameworkStores<ApplicationDbContext>()
