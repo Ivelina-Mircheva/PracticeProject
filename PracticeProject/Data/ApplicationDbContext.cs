@@ -32,6 +32,5 @@ namespace PracticeProject.Data
                 .HasForeignKey(u => u.UserId)
                 .OnDelete(DeleteBehavior.Restrict);
         }
-        public DbSet<PracticeProject.ViewModels.Projects.ProjectViewModel> ProjectViewModel { get; set; } = default!;
     }
 }
