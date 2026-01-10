@@ -1,5 +1,6 @@
 ﻿using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore;
+using PracticeProject.ViewModels.Projects;
 
 namespace PracticeProject.Data
 {
@@ -31,5 +32,6 @@ namespace PracticeProject.Data
                 .HasForeignKey(u => u.UserId)
                 .OnDelete(DeleteBehavior.Restrict);
         }
+        public DbSet<PracticeProject.ViewModels.Projects.ProjectViewModel> ProjectViewModel { get; set; } = default!;
     }
 }

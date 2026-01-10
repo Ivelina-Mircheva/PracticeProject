@@ -1,0 +1,71 @@
+﻿@model PracticeProject.ViewModels.Projects.ProjectViewModel
+
+@{
+    ViewData["Title"] = "Edit Project";
+}
+
+<div class="container mt-5">
+
+    <!-- Page header -->
+    <div class="row justify-content-center mb-4">
+        <div class="col-lg-6 text-center">
+            <h1 class="display-6 fw-bold">Edit Project</h1>
+            <p class="text-muted">
+                Update your project details below
+            </p>
+        </div>
+    </div>
+
+    <!-- Edit form card -->
+    <div class="row justify-content-center">
+        <div class="col-lg-6">
+            <div class="card shadow-sm project-card">
+                <div class="card-body">
+
+                    <form asp-action="Edit" novalidate>
+                        <div asp-validation-summary="ModelOnly"
+                             class="alert alert-danger mb-4"></div>
+
+                        <input type="hidden" asp-for="Id" />
+
+                        <!-- Title -->
+                        <div class="mb-3">
+                            <label asp-for="Title" class="form-label fw-semibold"></label>
+                            <input asp-for="Title"
+                                   class="form-control form-control-lg" />
+                            <span asp-validation-for="Title"
+                                  class="text-danger small"></span>
+                        </div>
+
+                        <!-- Description -->
+                        <div class="mb-4">
+                            <label asp-for="Description"
+                                   class="form-label fw-semibold"></label>
+                            <textarea asp-for="Description"
+                                      class="form-control"
+                                      rows="8"></textarea>
+                            <span asp-validation-for="Description"
+                                  class="text-danger small"></span>
+                        </div>
+
+                        <!-- Actions -->
+                        <div class="d-flex justify-content-between align-items-center">
+                            <a asp-action="Index"
+                               class="btn btn-outline-secondary">
+                                ← Back to Projects
+                            </a>
+
+                            <button type="submit"
+                                    class="btn btn-primary px-4">
+                                Save Changes
+                            </button>
+                        </div>
+
+                    </form>
+
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
