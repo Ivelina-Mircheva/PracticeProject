@@ -1,0 +1,84 @@
+﻿@model IEnumerable<PracticeProject.ViewModels.Projects.ProjectViewModel>
+
+@{
+    ViewData["Title"] = "Projects";
+}
+
+<div class="container mt-5">
+
+    <!-- Page header (в стил HomePage) -->
+    <div class="row mb-4">
+        <div class="col">
+            <h1 class="display-6 fw-bold">Projects</h1>
+            <p class="text-muted">
+                Manage your projects and track progress in one place
+            </p>
+        </div>
+        <div class="col-auto align-self-center">
+            <a asp-action="Create" class="btn btn-primary btn-lg">
+                Create Project
+            </a>
+        </div>
+    </div>
+
+    <!-- Empty state -->
+    @if (!Model.Any())
+    {
+        <div class="border rounded-3 p-5 text-center text-muted bg-light">
+            <h5 class="fw-semibold">No projects yet</h5>
+            <p class="mb-0">
+                Create your first project to start organizing tasks.
+            </p>
+        </div>
+    }
+    else
+    {
+        <!-- Vertical project list -->
+        <div class="list-group list-group-flush">
+            @foreach (var item in Model)
+            {
+                <div class="list-group-item py-4 px-3">
+                    <div class="row align-items-center">
+
+                        <!-- Project info -->
+                        <div class="col-md-8">
+                            <h5 class="fw-semibold mb-1">
+                                @item.Title
+                            </h5>
+
+                            <p class="text-muted mb-0">
+                                @(string.IsNullOrWhiteSpace(item.Description)
+                                                        ? "No description provided."
+                                                        : item.Description.Length > 160
+                                                        ? item.Description.Substring(0, 160) + "..."
+                                                        : item.Description)
+                    </p>
+                </div>
+
+                        <!-- Actions -->
+                        <div class="col-md-4 text-md-end mt-3 mt-md-0">
+                            <a asp-action="Details"
+                               asp-route-id="@item.Id"
+                               class="btn btn-outline-primary me-2">
+                                Details
+                            </a>
+
+                            <a asp-action="Edit"
+                               asp-route-id="@item.Id"
+                               class="btn btn-outline-secondary me-2">
+                                Edit
+                            </a>
+
+                            <a asp-action="Delete"
+                               asp-route-id="@item.Id"
+                               class="btn btn-outline-danger">
+                                Delete
+                            </a>
+                        </div>
+
+                    </div>
+                </div>
+                }
+        </div>
+    }
+</div>
