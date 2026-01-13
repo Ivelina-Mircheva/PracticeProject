@@ -13,22 +13,35 @@ namespace PracticeProject.Services.Tasks
             _context = context;
         }
 
-        public IEnumerable<TaskViewModel> GetAll(string userId)
-        {
-            return _context.Tasks
-                .Where(t => t.UserId == userId)
-                .Select(t => new TaskViewModel
-                {
-                    Id = t.Id,
-                    Title = t.Title,
-                    Description = t.Description,
-                    DueDate = t.DueDate,
-                    Priority = t.Priority,
-                    Status = t.Status,
-                    ProjectId = t.ProjectId,
-                    ProjectName = t.Project.Title
-                })
-                .ToList();
+        public IEnumerable<TaskViewModel> GetAll(
+            string userId,
+            int? projectId = null,
+            PriorityType? priority = null,
+            StatusType? status = null)
+            {
+                var query = _context.Tasks
+                    .Where(t => t.UserId == userId);
+
+                if (projectId.HasValue)
+                    query = query.Where(t => t.ProjectId == projectId);
+
+                if (priority.HasValue)
+                    query = query.Where(t => t.Priority == priority);
+
+                if (status.HasValue)
+                    query = query.Where(t => t.Status == status);
+
+                return query
+                    .Select(t => new TaskViewModel
+                    {
+                        Id = t.Id,
+                        Title = t.Title,
+                        DueDate = t.DueDate,
+                        Priority = t.Priority,
+                        Status = t.Status,
+                        ProjectName = t.Project.Title
+                    })
+                    .ToList();
         }
 
         public IEnumerable<SelectListItem> GetUserProjects(string userId)

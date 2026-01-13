@@ -19,14 +19,20 @@ namespace PracticeProject.Controllers
             _userManager = userManager;
         }
 
-        public IActionResult Index()
+        public IActionResult Index(TaskFilterViewModel filter)
         {
             var userId = _userManager.GetUserId(User);
+            if (userId == null) return Unauthorized();
 
-            if (userId == null)
-                return Unauthorized();
+            var tasks = _service.GetAll(
+                userId,
+                filter.ProjectId,
+                filter.Priority,
+                filter.Status);
 
-            var tasks = _service.GetAll(userId);
+            filter.Projects = _service.GetUserProjects(userId);
+
+            ViewBag.Filter = filter;
             return View(tasks);
         }
 

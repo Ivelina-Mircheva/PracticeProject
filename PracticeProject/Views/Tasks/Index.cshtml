@@ -4,39 +4,112 @@
     ViewData["Title"] = "My Tasks";
 }
 
-<div class="container mt-5">
-    <div class="d-flex justify-content-between align-items-center mb-4">
-        <h2 class="fw-bold">My Tasks</h2>
-        <a asp-action="Create" class="btn btn-primary">Create Task</a>
-    </div>
+@using PracticeProject.ViewModels.Tasks
+@using PracticeProject.Data
+@{
+    var filter = ViewBag.Filter as TaskFilterViewModel;
+}
 
-    <table class="table table-hover shadow-sm">
-        <thead class="table-light">
-            <tr>
-                <th>Title</th>
-                <th>Project</th>
-                <th>Due Date</th>
-                <th>Priority</th>
-                <th>Status</th>
-                <th class="text-end">Actions</th>
-            </tr>
-        </thead>
-        <tbody>
-            @foreach (var task in Model)
-            {
-                <tr>
-                    <td>@task.Title</td>
-                    <td>@task.ProjectName</td>
-                    <td>@task.DueDate.ToShortDateString()</td>
-                    <td>@task.Priority</td>
-                    <td>@task.Status</td>
-                    <td class="text-end">
-                        <a asp-action="Details" asp-route-id="@task.Id" class="btn btn-sm btn-outline-info">Details</a>
-                        <a asp-action="Edit" asp-route-id="@task.Id" class="btn btn-sm btn-outline-primary">Edit</a>
-                        <a asp-action="Delete" asp-route-id="@task.Id" class="btn btn-sm btn-outline-danger">Delete</a>
-                    </td>
-                </tr>
-            }
-        </tbody>
-    </table>
+<div class="d-flex justify-content-between align-items-center mb-3">
+    <h2 class="fw-bold mb-0">My Tasks</h2>
+
+    <a asp-action="Create"
+       class="btn btn-primary">
+        Create Task
+    </a>
 </div>
+
+<form method="get" class="card shadow-sm p-3 mb-4">
+    <div class="row g-3 align-items-end">
+
+        <div class="col-md-4">
+            <label class="form-label">Project</label>
+            <select name="ProjectId" class="form-select">
+                <option value="">All</option>
+                @foreach (var p in filter!.Projects!)
+                {
+                    <option value="@p.Value"
+                            selected="@(p.Value == filter.ProjectId?.ToString())">
+                        @p.Text
+                    </option>
+                }
+            </select>
+        </div>
+
+        <div class="col-md-3">
+            <label class="form-label">Priority</label>
+            <select name="Priority" class="form-select">
+                <option value="">All</option>
+                @foreach (var p in Enum.GetValues<PriorityType>())
+                {
+                    <option value="@p"
+                            selected="@(p == filter.Priority)">
+                        @p
+                    </option>
+                }
+            </select>
+        </div>
+
+        <div class="col-md-3">
+            <label class="form-label">Status</label>
+            <select name="Status" class="form-select">
+                <option value="">All</option>
+                @foreach (var s in Enum.GetValues<StatusType>())
+                {
+                    <option value="@s"
+                            selected="@(s == filter.Status)">
+                        @s
+                    </option>
+                }
+            </select>
+        </div>
+
+        <div class="col-md-2">
+            <button class="btn btn-primary w-100">Filter</button>
+        </div>
+    </div>
+</form>
+
+<table class="table table-hover shadow-sm">
+    <thead class="table-light">
+        <tr>
+            <th>Title</th>
+            <th>Project</th>
+            <th>Due Date</th>
+            <th>Priority</th>
+            <th>Status</th>
+            <th class="text-end">Actions</th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var task in Model)
+        {
+            <tr>
+                <td>@task.Title</td>
+                <td>@task.ProjectName</td>
+                <td>@task.DueDate.ToShortDateString()</td>
+                <td>@task.Priority</td>
+                <td>@task.Status</td>
+                <td class="text-end">
+                    <a asp-action="Details"
+                       asp-route-id="@task.Id"
+                       class="btn btn-sm btn-outline-info">
+                        Details
+                    </a>
+                    <a asp-action="Edit"
+                       asp-route-id="@task.Id"
+                       class="btn btn-sm btn-outline-primary">
+                        Edit
+                    </a>
+                    <a asp-action="Delete"
+                       asp-route-id="@task.Id"
+                       class="btn btn-sm btn-outline-danger">
+                        Delete
+                    </a>
+                </td>
+            </tr>
+        }
+    </tbody>
+</table>
+
+
