@@ -1,0 +1,18 @@
+﻿@model PracticeProject.ViewModels.Tasks.TaskViewModel
+
+@{
+    ViewData["Title"] = "Create Task";
+}
+
+<div class="container mt-5">
+    <h2 class="fw-bold mb-4">Create Task</h2>
+
+    <form method="post" class="card shadow-sm p-4">
+        <partial name="_TaskForm" model="Model" />
+
+        <div class="mt-3">
+            <button type="submit" class="btn btn-success">Create</button>
+            <a asp-action="Index" class="btn btn-secondary">Cancel</a>
+        </div>
+    </form>
+</div>

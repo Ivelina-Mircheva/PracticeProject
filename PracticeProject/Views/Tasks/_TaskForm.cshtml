@@ -1,0 +1,42 @@
+﻿@model PracticeProject.ViewModels.Tasks.TaskViewModel
+@using PracticeProject.Data
+
+<div class="mb-3">
+    <label asp-for="Title" class="form-label"></label>
+    <input asp-for="Title" class="form-control" />
+    <span asp-validation-for="Title" class="text-danger"></span>
+</div>
+
+<div class="mb-3">
+    <label asp-for="Description" class="form-label"></label>
+    <textarea asp-for="Description" class="form-control"></textarea>
+</div>
+
+<div class="mb-3">
+    <label asp-for="DueDate" class="form-label"></label>
+    <input asp-for="DueDate" type="date" class="form-control" />
+</div>
+
+<div class="mb-3">
+    <label asp-for="Priority" class="form-label"></label>
+    <select asp-for="Priority"
+            asp-items="Html.GetEnumSelectList<PriorityType>()"
+            class="form-select"></select>
+</div>
+
+<div class="mb-3">
+    <label asp-for="Status" class="form-label"></label>
+    <select asp-for="Status"
+            asp-items="Html.GetEnumSelectList<StatusType>()"
+            class="form-select"></select>
+</div>
+
+<div class="mb-3">
+    <label asp-for="ProjectId" class="form-label"></label>
+    <select asp-for="ProjectId"
+            asp-items="Model.Projects"
+            class="form-select">
+        <option value="">-- Select Project --</option>
+    </select>
+    <span asp-validation-for="ProjectId" class="text-danger"></span>
+</div>
