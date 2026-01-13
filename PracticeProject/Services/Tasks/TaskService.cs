@@ -25,7 +25,8 @@ namespace PracticeProject.Services.Tasks
                     DueDate = t.DueDate,
                     Priority = t.Priority,
                     Status = t.Status,
-                    ProjectId = t.ProjectId
+                    ProjectId = t.ProjectId,
+                    ProjectName = t.Project.Title
                 })
                 .ToList();
         }

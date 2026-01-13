@@ -1,5 +1,6 @@
 ﻿using Microsoft.AspNetCore.Mvc.Rendering;
 using PracticeProject.Data;
+using PracticeProject.Validation;
 using System.ComponentModel.DataAnnotations;
 
 namespace PracticeProject.ViewModels.Tasks
@@ -13,8 +14,11 @@ namespace PracticeProject.ViewModels.Tasks
 
         public string? Description { get; set; }
 
+        public string ProjectName { get; set; } = null!;
+
         [Required]
         [DataType(DataType.Date)]
+        [DateAfterToday]
         public DateTime DueDate { get; set; }
 
         [Required]
