@@ -1,4 +1,5 @@
-﻿using Microsoft.AspNetCore.Identity;
+﻿using Microsoft.AspNetCore.Authorization;
+using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
 using PracticeProject.Data;
 using PracticeProject.Services.Projects;
@@ -6,6 +7,7 @@ using PracticeProject.ViewModels.Projects;
 
 namespace PracticeProject.Controllers
 {
+    [Authorize]
     public class ProjectsController : Controller
     {
         private readonly IProjectService _service;

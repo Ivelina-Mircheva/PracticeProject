@@ -1,4 +1,5 @@
-﻿using Microsoft.AspNetCore.Identity;
+﻿using Microsoft.AspNetCore.Authorization;
+using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
 using PracticeProject.Data;
 using PracticeProject.Services.Tasks;
@@ -6,6 +7,7 @@ using PracticeProject.ViewModels.Tasks;
 
 namespace PracticeProject.Controllers
 {
+    [Authorize]
     public class TasksController : Controller
     {
         private readonly ITaskService _service;
