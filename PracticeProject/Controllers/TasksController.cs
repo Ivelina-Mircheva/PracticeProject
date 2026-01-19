@@ -97,6 +97,8 @@ namespace PracticeProject.Controllers
             if (task == null)
                 return NotFound();
 
+            task.Projects = _service.GetUserProjects(userId);
+
             return View(task);
         }
 
@@ -104,14 +106,18 @@ namespace PracticeProject.Controllers
         public IActionResult Edit(TaskViewModel model)
         {
             if (!ModelState.IsValid)
+            {
+                var userId = _userManager.GetUserId(User);
+                model.Projects = _service.GetUserProjects(userId!);
                 return View(model);
+            }
 
-            var userId = _userManager.GetUserId(User);
+            var userIdFinal = _userManager.GetUserId(User);
 
-            if (userId == null)
+            if (userIdFinal == null)
                 return Unauthorized();
 
-            _service.Update(model, userId);
+            _service.Update(model, userIdFinal);
             return RedirectToAction(nameof(Index));
         }
 
