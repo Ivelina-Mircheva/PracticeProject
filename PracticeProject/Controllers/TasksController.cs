@@ -39,7 +39,7 @@ namespace PracticeProject.Controllers
             return View(tasks);
         }
 
-        public IActionResult Create(int? projectId)
+        public IActionResult Create(int? projectId, string? returnUrl = null)
         {
             var userId = _userManager.GetUserId(User);
             if (userId == null) return Unauthorized();
@@ -47,7 +47,8 @@ namespace PracticeProject.Controllers
             var model = new TaskViewModel
             {
                 ProjectId = projectId ?? 0,
-                Projects = _service.GetUserProjects(userId)
+                Projects = _service.GetUserProjects(userId),
+                ReturnUrl = returnUrl ?? Request.Headers["Referer"].ToString()
             };
 
             return View(model);
@@ -66,7 +67,10 @@ namespace PracticeProject.Controllers
             var userIdFinal = _userManager.GetUserId(User);
             if (userIdFinal == null) return Unauthorized();
 
-            _service.Create(model, userIdFinal);
+            _service.Create(model, userIdFinal); 
+            if (!string.IsNullOrEmpty(model.ReturnUrl))
+                return Redirect(model.ReturnUrl);
+
             return RedirectToAction(nameof(Index));
         }
 

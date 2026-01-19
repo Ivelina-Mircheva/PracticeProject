@@ -27,6 +27,8 @@ namespace PracticeProject.ViewModels.Tasks
         [Required]
         public StatusType Status { get; set; }
 
+        public string? ReturnUrl { get; set; }
+
         [Required]
         public int ProjectId { get; set; }
 
