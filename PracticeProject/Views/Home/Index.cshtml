@@ -8,9 +8,9 @@
     @if (!isAuthenticated)
     {
         <!-- ================= HOME BEFORE LOGIN ================= -->
-        <div class="row align-items-center mb-5">
+        <div class="row align-items-center mb-5 pb-4">
             <div class="col-md-6">
-                <h1 class="display-4 fw-bold">Practice Project</h1>
+                <h1 class="display-5 fw-bold">Practice Project</h1>
                 <p class="lead">
                     Plan projects, assign tasks, and track your team’s progress – all in one place.
                 </p>
@@ -36,8 +36,9 @@
         </div>
 
         <!-- Cards -->
-        <div class="row text-center">
-            <div class="col-md-4 mb-4">
+        <div class="row g-5 mb-4 text-center justify-content-center">
+
+            <div class="col-md-4 px-3">
                 <div class="card h-100 shadow-sm">
                     <div class="card-body">
                         <h5 class="card-title">Projects</h5>
@@ -47,8 +48,8 @@
                     </div>
                 </div>
             </div>
-
-            <div class="col-md-4 mb-4">
+            <div class="col-md-1"></div>
+            <div class="col-md-4 px-3">
                 <div class="card h-100 shadow-sm">
                     <div class="card-body">
                         <h5 class="card-title">Tasks</h5>
@@ -59,16 +60,6 @@
                 </div>
             </div>
 
-            <div class="col-md-4 mb-4">
-                <div class="card h-100 shadow-sm">
-                    <div class="card-body">
-                        <h5 class="card-title">Progress</h5>
-                        <p class="card-text">
-                            Monitor progress in real time.
-                        </p>
-                    </div>
-                </div>
-            </div>
         </div>
 
         <!--Actions -->
@@ -86,9 +77,9 @@
     else
     {
         <!-- ================= LOGGED-IN DASHBOARD ================= -->
-        <div class="row align-items-center mb-5">
+        <div class="row align-items-center mb-5 pb-4">
             <div class="col-md-6">
-                <h1 class="display-6 fw-bold">
+                <h1 class="display-5 fw-bold">
                     Welcome back!
                 </h1>
                 <p class="lead text-muted">
@@ -112,14 +103,14 @@
             <div class="col-md-6 text-center">
                 <img src="https://cdn-icons-png.freepik.com/512/7412/7412637.png"
                      class="img-fluid"
-                     style="max-height: 260px;"
+                     style="max-height: 300px;"
                      alt="Project dashboard">
             </div>
         </div>
 
         <!-- Quick actions -->
-        <div class="row g-4 mb-4 text-center">
-            <div class="col-md-4">
+        <div class="row g-4 mb-4 text-center justify-content-center">
+            <div class="col-md-4 px-3">
                 <div class="card h-100 shadow-sm">
                     <div class="card-body">
                         <h5 class="card-title">Projects</h5>
@@ -134,8 +125,8 @@
                     </div>
                 </div>
             </div>
-
-            <div class="col-md-4">
+            <div class="col-md-1"></div>
+            <div class="col-md-4 px-3">
                 <div class="card h-100 shadow-sm">
                     <div class="card-body">
                         <h5 class="card-title">Tasks</h5>
@@ -151,21 +142,6 @@
                 </div>
             </div>
 
-            <div class="col-md-4">
-                <div class="card h-100 shadow-sm">
-                    <div class="card-body">
-                        <h5 class="card-title">Progress</h5>
-                        <p class="card-text text-muted">
-                            Monitor the progress of your projects.
-                        </p>
-                        <a asp-controller="Projects"
-                           asp-action="Index"
-                           class="btn btn-outline-success btn-sm">
-                            View Overview
-                        </a>
-                    </div>
-                </div>
-            </div>
         </div>
 
         <div class="card border-0 bg-light">
