@@ -24,6 +24,44 @@
                                         : Model.Description)
                 </p>
             </div>
+            <h3>Tasks</h3>
+
+            @if (!Model.Tasks.Any())
+            {
+                <p>No tasks for this project.</p>
+            }
+            else
+            {
+                <table class="table">
+                    <thead>
+                        <tr>
+                            <th>Title</th>
+                            <th>Status</th>
+                            <th>Priority</th>
+                            <th>Due Date</th>
+                            <th></th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        @foreach (var task in Model.Tasks)
+                        {
+                            <tr>
+                                <td>@task.Title</td>
+                                <td>@task.Status</td>
+                                <td>@task.Priority</td>
+                                <td>@task.DueDate.ToShortDateString()</td>
+                                <td>
+                                    <a asp-controller="Tasks"
+                                       asp-action="Details"
+                                       asp-route-id="@task.Id">
+                                        Details
+                                    </a>
+                                </td>
+                            </tr>
+                        }
+                    </tbody>
+                </table>
+            }
 
             <div class="d-flex justify-content-between">
                 <a asp-action="Index" class="btn btn-outline-secondary">

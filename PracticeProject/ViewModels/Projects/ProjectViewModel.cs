@@ -1,4 +1,5 @@
-﻿using System.ComponentModel.DataAnnotations;
+﻿using PracticeProject.ViewModels.Tasks;
+using System.ComponentModel.DataAnnotations;
 
 namespace PracticeProject.ViewModels.Projects
 {
@@ -11,5 +12,7 @@ namespace PracticeProject.ViewModels.Projects
         public string Title { get; set; }
 
         public string Description { get; set; }
+
+        public List<TaskViewModel> Tasks { get; set; } = new();
     }
 }

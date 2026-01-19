@@ -1,5 +1,6 @@
 ﻿using PracticeProject.Data;
 using PracticeProject.ViewModels.Projects;
+using PracticeProject.ViewModels.Tasks;
 
 namespace PracticeProject.Services.Projects
 {
@@ -33,10 +34,22 @@ namespace PracticeProject.Services.Projects
                 {
                     Id = p.Id,
                     Title = p.Title,
-                    Description = p.Description
+                    Description = p.Description,
+
+                    Tasks = p.Tasks.Select(t => new TaskViewModel
+                    {
+                        Id = t.Id,
+                        Title = t.Title,
+                        Description = t.Description,
+                        DueDate = t.DueDate,
+                        Priority = t.Priority,
+                        Status = t.Status,
+                        ProjectId = t.ProjectId
+                    }).ToList()
                 })
                 .FirstOrDefault();
         }
+
 
         public void Create(ProjectViewModel model, string userId)
         {
