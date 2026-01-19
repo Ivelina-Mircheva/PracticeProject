@@ -11,6 +11,8 @@ namespace PracticeProject.ViewModels.Projects
         [StringLength(100)]
         public string Title { get; set; }
 
+        [Required(ErrorMessage = "Description is required")]
+        [StringLength(1000, ErrorMessage = "Description cannot exceed 1000 characters")]
         public string Description { get; set; }
 
         public List<TaskViewModel> Tasks { get; set; } = new();
