@@ -61,6 +61,14 @@
                                 Details
                             </a>
 
+                            <a asp-controller="Tasks"
+                               asp-action="Create"
+                               asp-route-projectId="@item.Id"
+                               class="btn btn-outline-success me-2">
+                                Add Task
+                            </a>
+
+
                             <a asp-action="Edit"
                                asp-route-id="@item.Id"
                                class="btn btn-outline-secondary me-2">

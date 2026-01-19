@@ -7,7 +7,7 @@ namespace PracticeProject.ViewModels.Projects
     {
         public int Id { get; set; }
 
-        [Required(ErrorMessage = "Името на проекта е задължително")]
+        [Required(ErrorMessage = "Title is required")]
         [StringLength(100)]
         public string Title { get; set; }
 

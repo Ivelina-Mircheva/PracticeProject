@@ -1,6 +1,7 @@
 ﻿using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.CodeAnalysis;
 using PracticeProject.Data;
 using PracticeProject.Services.Tasks;
 using PracticeProject.ViewModels.Tasks;
@@ -38,13 +39,14 @@ namespace PracticeProject.Controllers
             return View(tasks);
         }
 
-        public IActionResult Create()
+        public IActionResult Create(int? projectId)
         {
             var userId = _userManager.GetUserId(User);
             if (userId == null) return Unauthorized();
 
             var model = new TaskViewModel
             {
+                ProjectId = projectId ?? 0,
                 Projects = _service.GetUserProjects(userId)
             };
 
